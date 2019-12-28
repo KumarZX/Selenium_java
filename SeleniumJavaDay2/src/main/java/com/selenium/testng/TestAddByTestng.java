@@ -17,19 +17,19 @@ public class TestAddByTestng {
 		int result=calculator.getResult();
 		Assert.assertEquals(result, 3);
 	}
-  @BeforeMethod
-  public void beforeMethod() {
+  	@BeforeMethod
+  	public void beforeMethod() {
 	  calculator.clear();
   }
 
 
-  @BeforeClass
-  public void beforeClass() {
+  	@BeforeClass
+  	public void beforeClass() {
 	  calculator = new Calculator();
   }
 
-  @AfterClass
-  public void afterClass() {
+  	@AfterClass
+  	public void afterClass() {
 	  calculator=null;
   }
 

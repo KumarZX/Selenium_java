@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/FirstPro/FirstPro.iml" filepath="$PROJECT_DIR$/FirstPro/FirstPro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SeleniumJavaDay2/SeleniumJavaDay2.iml" filepath="$PROJECT_DIR$/SeleniumJavaDay2/SeleniumJavaDay2.iml" />
+    </modules>
+  </component>
+</project>

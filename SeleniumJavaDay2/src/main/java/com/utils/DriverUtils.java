@@ -33,7 +33,7 @@ public class DriverUtils {
 			
 		}else if("chrome".equalsIgnoreCase(brower)) {
 			service = new ChromeDriverService.Builder()
-					.usingDriverExecutable(new File("driver\\chromedriver.exe"))
+					.usingDriverExecutable(new File("/Users/kuma/Documents/drivers/chromedriver"))
 					.usingAnyFreePort().build();
 			
 		}else if("ie".equalsIgnoreCase(brower)) {

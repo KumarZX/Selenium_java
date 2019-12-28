@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_firstpro" default="compile.module.firstpro">
+  <dirname property="module.firstpro.basedir" file="${ant.file.module_firstpro}"/>
+  
+  <property name="module.jdk.home.firstpro" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.firstpro" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.firstpro" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.firstpro" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="firstpro.output.dir" value="${module.firstpro.basedir}/../out/production/FirstPro"/>
+  <property name="firstpro.testoutput.dir" value="${module.firstpro.basedir}/../out/test/FirstPro"/>
+  
+  <path id="firstpro.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="firstpro.module.production.classpath">
+    <path refid="${module.jdk.classpath.firstpro}"/>
+  </path>
+  
+  <path id="firstpro.runtime.production.module.classpath">
+    <pathelement location="${firstpro.output.dir}"/>
+  </path>
+  
+  <path id="firstpro.module.classpath">
+    <path refid="${module.jdk.classpath.firstpro}"/>
+    <pathelement location="${firstpro.output.dir}"/>
+  </path>
+  
+  <path id="firstpro.runtime.module.classpath">
+    <pathelement location="${firstpro.testoutput.dir}"/>
+    <pathelement location="${firstpro.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.firstpro">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.firstpro">
+    <patternset refid="excluded.from.module.firstpro"/>
+  </patternset>
+  
+  <path id="firstpro.module.sourcepath">
+    <dirset dir="${module.firstpro.basedir}">
+      <include name="src/main/java"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.firstpro" depends="compile.module.firstpro.production,compile.module.firstpro.tests" description="Compile module FirstPro"/>
+  
+  <target name="compile.module.firstpro.production" depends="register.custom.compilers" description="Compile module FirstPro; production classes">
+    <mkdir dir="${firstpro.output.dir}"/>
+    <javac2 destdir="${firstpro.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.firstpro}/javac">
+      <compilerarg line="${compiler.args.firstpro}"/>
+      <bootclasspath refid="firstpro.module.bootclasspath"/>
+      <classpath refid="firstpro.module.production.classpath"/>
+      <src refid="firstpro.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.firstpro"/>
+    </javac2>
+    
+    <copy todir="${firstpro.output.dir}">
+      <fileset dir="${module.firstpro.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.firstpro.tests" depends="register.custom.compilers,compile.module.firstpro.production" description="compile module FirstPro; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.firstpro" description="cleanup module">
+    <delete dir="${firstpro.output.dir}"/>
+    <delete dir="${firstpro.testoutput.dir}"/>
+  </target>
+</project>
